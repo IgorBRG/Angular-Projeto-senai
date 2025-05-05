@@ -17,7 +17,7 @@ export class LoginComponent {
 
   constructor(private router: Router, private service:ApiService) {}
 
-  onLogin(login:any) {
+  onLogin(login:Login[]): void {
     this.service.login(login).subscribe({
       next: ()=>{
         this.router.navigateByUrl('/home');
