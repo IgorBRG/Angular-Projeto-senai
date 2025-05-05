@@ -98,6 +98,7 @@ app.post("/vehicleData", (req, res) => {
       case "2FRHDUYS2Y63NHD22454":
         return res.status(200).json({
           id: 1,
+          vehicle: "Ranger",
           odometro: 23344,
           nivelCombustivel: 76,
           status: "on",
@@ -112,6 +113,7 @@ app.post("/vehicleData", (req, res) => {
       case "2RFAASDY54E4HDU34874":
         return res.status(200).json({
           id: 2,
+          vehicle: "Mustang",
           odometro: 130000,
           nivelCombustivel: 19,
           status: "off",
@@ -126,6 +128,7 @@ app.post("/vehicleData", (req, res) => {
       case "2FRHDUYS2Y63NHD22455":
         return res.status(200).json({
           id: 3,
+          vehicle: "Territory",
           odometro: 50000,
           nivelCombustivel: 90,
           status: "on",
@@ -140,6 +143,7 @@ app.post("/vehicleData", (req, res) => {
       case "2RFAASDY54E4HDU34875":
         return res.status(200).json({
           id: 4,
+          vehicle: "Bronco Sport",
           odometro: 10000,
           nivelCombustivel: 25,
           status: "off",
