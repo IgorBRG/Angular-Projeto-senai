@@ -10,7 +10,7 @@ import { Login } from '../interfaces/Login.component';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, ]
 })
 export class LoginComponent {
    mensagemDeErro: string | null = null;

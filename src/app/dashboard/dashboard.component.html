@@ -1,0 +1,24 @@
+<div>
+    <h1>Dashboard Veículo</h1>
+    
+    <select (change)="onVehicleSelect($event)">
+      <option value="" disabled selected>Selecione um veículo</option> 
+      <option *ngFor="let vehicle of vehicles" [value]="vehicle.id">{{ vehicle.vehicle }}</option>
+    </select>
+  
+    <div *ngIf="selectedVehicle" class="text-center mt-4">
+      <h2>{{ selectedVehicle.vehicle }}</h2>
+      <img [src]="selectedVehicle.img" alt="{{ selectedVehicle.vehicle }}" class="img-fluid">
+      
+      
+      <p>Total de Vendas: {{ selectedVehicle.volumetotal }}</p>
+      <p>Veículos conectados: {{ selectedVehicle.connected }}</p>
+      <p>Update de Software: {{ selectedVehicle.softwareUpdates }}</p>
+      
+      
+      <p>Oodômetro: {{ selectedVehicle.odometro }}</p>
+      <p>Combustível: {{ selectedVehicle.nivelCombustivel }}%</p>
+      <p>Status: {{ selectedVehicle.status }}</p>
+      <p>Localização: Latitude {{ selectedVehicle.lat }}, Longitude {{ selectedVehicle.long }}</p>
+    </div>
+  </div>
