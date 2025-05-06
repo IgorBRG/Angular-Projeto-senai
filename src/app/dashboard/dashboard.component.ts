@@ -1,17 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Vehicle } from '../interfaces/Dashboard.component';
+import { SelectedVehicleData } from '../interfaces/Dashboard.component';
+
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  imports: [CommonModule]
+  imports: [CommonModule, FormsModule]
 })
 export class DashboardComponent implements OnInit {
-  vehicles: any[] = []; 
-  selectedVehicle: any; 
+  vehicles: Vehicle[] = []; 
+  selectedVehicle: SelectedVehicleData | null = null; 
+  searchQuery: string = ''; 
 
   constructor(private apiService: ApiService) {}
 
@@ -31,31 +36,49 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  onVehicleSelect(event: Event) {
-    const selectElement = event.target as HTMLSelectElement;
-    const vehicleId = selectElement.value;
+  searchByVin() {
+    const vin = this.searchQuery.trim(); 
+    if (!vin) {
+      console.error('VIN não pode ser vazio');
+      return;
+    }
 
-    
-    const selectedVehicle = this.vehicles.find(vehicle => vehicle.id === +vehicleId);
-    
-    if (selectedVehicle) {
+    const foundVehicle = this.vehicles.find(vehicle => vehicle.vin === vin); 
+    if (foundVehicle) {
       
-      const vin = selectedVehicle.vin; 
-
-      
-      console.log('VIN se comunica com a API:', vin);
-
       this.apiService.getVehicleData(vin).subscribe({
-        next: (vehicleData) => {
+        next: (vehicleData: SelectedVehicleData) => {
           this.selectedVehicle = vehicleData; 
-          console.log('Data do veiculo buscado com sucesso:', vehicleData); 
+          console.log('Veículo encontrado:', this.selectedVehicle);
         },
         error: (error) => {
-          console.error('erro ao buscar a data do veiculo', error);
+          console.error('Erro ao buscar dados do veículo:', error);
+          this.selectedVehicle = null; 
         }
       });
-    } else {
-      console.error('Veiculo não encontrado com o ID:', vehicleId);
+ } else {
+      console.error('Veículo não encontrado com o VIN:', vin);
+      this.selectedVehicle = null; 
+    }
+  }
+
+  onVehicleSelect(event: Event) {
+    const selectedId = (event.target as HTMLSelectElement).value; 
+    if (selectedId) {
+      const foundVehicle = this.vehicles.find(vehicle => vehicle.id.toString() === selectedId); 
+      if (foundVehicle) {
+        
+        this.apiService.getVehicleData(foundVehicle.vin).subscribe({
+          next: (vehicleData: SelectedVehicleData) => {
+            this.selectedVehicle = vehicleData; 
+            console.log('Veículo selecionado:', this.selectedVehicle);
+          },
+          error: (error) => {
+            console.error('Erro ao buscar dados do veículo:', error);
+            this.selectedVehicle = null; 
+          }
+        });
+      }
     }
   }
 }
