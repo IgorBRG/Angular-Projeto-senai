@@ -25,6 +25,9 @@ export class ApiService {
     const url = 'http://localhost:3001/vehicleData';
     return this.http.post<any>(url, { vin });
 
-}}
+}
+  
+
+}
 
   

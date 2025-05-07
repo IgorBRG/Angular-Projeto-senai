@@ -80,6 +80,16 @@ app.get("/vehicles", (req, res) => {
         softwareUpdates: 2050,
         img: "http://localhost:3001/img/broncoSport.png",
       },
+      {
+        id: 5,
+        odometro: 23544,
+        nivelCombustivel: 76,
+        status: "on",
+        lat: -12.2322,
+        long: -35.2314,
+        vin: "2FRHDUYS2Y63NHD22654"
+
+      }
     ];
 
     return res.status(200).json({ vehicles });
