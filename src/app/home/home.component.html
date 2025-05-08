@@ -8,29 +8,8 @@
   </div>
 </div>
 -->
-<button class="btn btn-primary m-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" >
-  <i class="bi bi-list"></i>
-  Menu
-</button>
-
-<div class="offcanvas offcanvas-start text-bg-light" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
-  <img src="" alt="Logo ford" class="logo-ford">
-  <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
-  <div class="offcanvas-body">
-    <ul class="nav-flex-column">
-      <li class="nav-item">
-        <a class="nav-link text-primary" [routerLink]="['/home']" >Home</a>
-
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-primary" [routerLink]="['/dashboard']" >Dashboard</a>
-      </li>
-      <li class="nav-item mt-3">
-        <button class="btn btn-danger" [routerLink]="['/login']">Logout</button>
-      </li>
-
-
-    </ul>
-  </div>
+<app-sidebar></app-sidebar>
+<div class="home-content">
+  <h1 class="text-white text-center">Bem-vindo à Dashboard da Ford</h1>
 </div>
 

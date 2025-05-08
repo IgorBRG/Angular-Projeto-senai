@@ -2,32 +2,25 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Login } from './interfaces/Login.component';
-
+import { Vehicle, SelectedVehicleData } from './interfaces/Dashboard.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  
+  private baseUrl = 'http://localhost:3001';
 
   constructor(private http: HttpClient) {}
 
-  login(users:Login[]): Observable<Login[]> {
-    const url = 'http://localhost:3001/login';
-    return this.http.post<Login[]>(url, users);
-    
+  login(user: Login[]): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/login`, user);
   }
-  getVehicles(): Observable<any> {
-    const url = 'http://localhost:3001/vehicles';
-    return this.http.get<any>(url);
+
+  getVehicles(): Observable<{ vehicles: Vehicle[] }> {
+    return this.http.get<{ vehicles: Vehicle[] }>(`${this.baseUrl}/vehicles`);
   }
-  getVehicleData(vin: string): Observable<any> {
-    const url = 'http://localhost:3001/vehicleData';
-    return this.http.post<any>(url, { vin });
 
+  getVehicleData(vin: string): Observable<SelectedVehicleData> {
+    return this.http.post<SelectedVehicleData>(`${this.baseUrl}/vehicleData`, { vin });
+  }
 }
-  
-
-}
-
-  

@@ -1,30 +1,39 @@
-<div>
-  <h1>Dashboard Veículo</h1>
+<app-sidebar></app-sidebar>
+
+<div class="container mt-4">
+
+  <div class="mb-4">
+    <h5>Buscar por VIN</h5>
+    <input [(ngModel)]="searchVin" class="form-control w-50 d-inline" placeholder="Digite o VIN">
+    <button class="btn btn-primary ms-2" (click)="searchByVin()">Buscar</button>
+  </div>
+
+  <div class="mb-4">
+    <h5>Selecionar veículo</h5>
+    <select [(ngModel)]="selectedId" (change)="onSelectChange()" class="form-select w-50">
+      <option [value]="''" disabled selected>Selecione um veículo</option>
+      <option *ngFor="let vehicle of vehicles" [value]="vehicle.id">{{ vehicle.vehicle }}</option>
+    </select>
+  </div>
+
+  <div *ngIf="selectedVehicleFromSelect" class="card p-3 mt-3 bg-white">
+    <h5 class="text-success">Resultado da seleção:</h5>
+    <p><strong>Update Software:</strong> {{ selectedVehicleFromSelect.softwareUpdates }}</p>
+    <p><strong>Conectados:</strong>{{selectedVehicleFromSelect.connected}}</p>
+    <p><strong>Total de vendas:</strong> {{ selectedVehicleFromSelect.volumetotal }}</p>
+    <img [src]="selectedVehicleFromSelect.img" alt="{{ selectedVehicleFromSelect.vehicle }}" class="img-fluid " style="width: 30%; height: auto;">
+
+  </div>
   
-  <div class="input-group mb-3">
-    <input 
-      type="text" 
-      [(ngModel)]="searchQuery" 
-      placeholder="Digite o VIN do veículo..." 
-      class="form-control"
-    />
-    <button class="btn btn-primary" (click)="searchByVin()">Buscar</button>
-  </div>
-  <select (change)="onVehicleSelect($event)">
-    <option value="" disabled selected>Selecione um veículo</option> 
-    <option *ngFor="let vehicle of vehicles" [value]="vehicle.id">{{ vehicle.vehicle }}</option>
-  </select>
-  <div *ngIf="selectedVehicle" class="text-center mt-4">
-    <h2>{{ selectedVehicle.vehicle }}</h2>
-    <img [src]="selectedVehicle.img" alt="{{ selectedVehicle.vehicle }}" class="img-fluid">
+  <div *ngIf="selectedVehicleFromSearch" class="card p-3 mt-3 bg-light">
+    <h5 class="text-primary">Resultado da busca por VIN:</h5>
+    <p><strong>Odômetro:</strong> {{ selectedVehicleFromSearch.odometro }} km</p>
+    <p><strong>Nivel de Combustível:</strong> {{ selectedVehicleFromSearch.nivelCombustivel }} %</p>
+    <p><strong>Status:</strong> {{ selectedVehicleFromSearch.status }}</p>
+    <p><strong>Lat.:</strong> {{ selectedVehicleFromSearch.lat }}</p>
+    <p><strong>Long.:</strong> {{ selectedVehicleFromSearch.long }}</p>
     
-    <p>Total de Vendas: {{ selectedVehicle.volumetotal }}</p>
-    <p>Veículos conectados: {{ selectedVehicle.connected }}</p>
-    <p>Update de Software: {{ selectedVehicle.softwareUpdates }}</p>
     
-    <p>Odomômetro: {{ selectedVehicle.odometro }}</p>
-    <p>Combustível: {{ selectedVehicle.nivelCombustivel }}%</p>
-    <p>Status: {{ selectedVehicle.status }}</p>
-    <p>Localização: Latitude {{ selectedVehicle.lat }}, Longitude {{ selectedVehicle.long }}</p>
   </div>
+
 </div>
