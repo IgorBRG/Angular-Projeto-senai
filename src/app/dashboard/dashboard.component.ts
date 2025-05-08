@@ -29,23 +29,27 @@ export class DashboardComponent implements OnInit {
     this.apiService.getVehicles().subscribe({
       next: (res) => {
         this.vehicles = res.vehicles;
+        console.log('Vehicles loaded by select:', this.vehicles);
       },
       error: (err) => console.error(err),
     });
   }
 
   searchByVin() {
+    console.log('Searching for VIN:', this.searchVin);
     const vin = this.searchVin.trim();
     if (!vin) return;
 
     this.apiService.getVehicleData(vin).subscribe({
       next: (data) => {
         this.selectedVehicleFromSearch = data;
+        console.log('Vehicle data:', data);
       },
       error: () => {
         this.selectedVehicleFromSearch = null;
         alert('Veículo não encontrado!');
       },
+
     });
   }
 
@@ -55,6 +59,7 @@ export class DashboardComponent implements OnInit {
       this.apiService.getVehicleData(selected.vin).subscribe({
         next: (data) => {
           this.selectedVehicleFromSelect = data;
+          console.log('Selected vehicle data:', data);
         },
         error: () => {
           this.selectedVehicleFromSelect = null;

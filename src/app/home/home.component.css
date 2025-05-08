@@ -1,10 +1,11 @@
 
   
   .home-content {
-    background-image: url(http://localhost:4200/img/ranger.png); /* Caminho da imagem de fundo */
+    background-image: url(http://localhost:4200/img/ranger.png); 
     background-size: cover;
     background-position: center;
-    height: 100vh;
+    background-position-y: 30px;
+    height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
