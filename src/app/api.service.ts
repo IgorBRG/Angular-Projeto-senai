@@ -12,8 +12,8 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  login(user: Login[]): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/login`, user);
+  login(user: Login[]): Observable<Login[]> {
+    return this.http.post<Login[]>(`${this.baseUrl}/login`, user);
   }
 
   getVehicles(): Observable<{ vehicles: Vehicle[] }> {
