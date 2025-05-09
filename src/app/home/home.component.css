@@ -1,12 +1,25 @@
 
   
-  .home-content {
-    background-image: url(http://localhost:4200/img/ranger.png); 
-    background-size: cover;
-    background-position: center;
-    background-position-y: 30px;
-    height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.home-container {
+  height: 100vh;
+  background: url('http://localhost:4200/img/ranger.png') no-repeat center center;
+  background-size: 75%;
+  background-color: #ffffff;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-card {
+  width: 450px;
+  height: 250px; 
+  background-color: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  text-align: left;
+  backdrop-filter: blur(3px);
+}
